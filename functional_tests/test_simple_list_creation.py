@@ -39,9 +39,7 @@ class NewVisitorTest(FunctionalTest):
 
         # Edith wonders whether the site will remember her list. Then she sees
 
-        self.fail('Finish the test!')
-
-    def test_multile_users_can_start_lists_at_different_urls(self):
+    def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
         self.browser.get(self.live_server_url)
         self.add_list_item('Buy peacock feathers')
