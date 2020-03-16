@@ -32,7 +32,7 @@ class SharingTest(FunctionalTest):
 
         # She notices a "Share this list" option
         share_box = self.browser.find_element_by_css_selector(
-            'input[name="share"]'
+            'input[name="sharee"]'
         )
         self.assertEqual(
             share_box.get_attribute('placeholder'),
@@ -44,8 +44,8 @@ class SharingTest(FunctionalTest):
         list_page.share_list_with('bob@example.com')
 
         # Bob now goes to the lists page with his browser
-        self.browser = oni_browser
-        MyListPage(self).go_to_my_lists_page()
+        self.browser = bob_browser
+        MyListsPage(self).go_to_my_lists_page()
 
         # He sees Edith's list in there
         self.browser.find_element_by_link_text('Get help').click()

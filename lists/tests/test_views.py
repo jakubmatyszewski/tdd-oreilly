@@ -191,3 +191,23 @@ class NewListViewIntegratedTest(TestCase):
         self.client.post('/lists/new', data={'text': 'new item'})
         list_ = List.objects.first()
         self.assertEqual(list_.owner, user)
+
+
+class ShareListTest(TestCase):
+    def test_post_redirects_to_list_page(self):
+        user = User.objects.create(email='a@b.com')
+        list_ = List.objects.create()
+        response = self.client.post(
+            f'/lists/{list_.id}/share',
+            data={'sharee': 'a@b.com'}
+        )
+        self.assertRedirects(response, list_.get_absolute_url())
+
+    def test_user_is_added_to_shared_with(self):
+        user = User.objects.create(email='a@b.com')
+        list_ = List.objects.create()
+        self.client.post(
+            f'/lists/{list_.id}/share',
+            data={'sharee': 'a@b.com'}
+        )
+        self.assertIn(user, list_.shared_with.all())

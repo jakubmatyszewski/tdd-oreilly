@@ -28,7 +28,7 @@ class ListPage(object):
 
     def get_share_box(self):
         return self.test.browser.find_element_by_css_selector(
-            'input[name="share"]'
+            'input[name="sharee"]'
         )
 
     def get_shared_with_list(self):
@@ -36,7 +36,7 @@ class ListPage(object):
             '.list-share'
         )
 
-    def share_list_with(self):
+    def share_list_with(self, email):
         self.get_share_box().send_keys(email)
         self.get_share_box().send_keys(Keys.ENTER)
         self.test.wait_for(lambda: self.test.assertIn(
